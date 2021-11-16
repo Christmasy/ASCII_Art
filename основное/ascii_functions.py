@@ -27,11 +27,11 @@ def pixels_to_ascii(image):
     characters = "".join([ASCII_CHARS[pixel // 25] for pixel in pixels])
     return(characters)
 
-def contrast(image, coeff):
-    return ImageEnhance.Contrast(image).enhance(coeff)
-
 def do_ascii_art(image, coeff, width, height):
     new_image_data =  pixels_to_ascii(grayify(resize_image_user_tools(contrast(image, coeff), width, height)))
     pixel_count = len(new_image_data)
     ascii_image = "\n".join(new_image_data[i:(i+width)] for i in range(0, pixel_count, width))
     return ascii_image
+
+def contrast(image, coeff):
+    return ImageEnhance.Contrast(image).enhance(coeff)
