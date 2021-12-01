@@ -1,10 +1,12 @@
-from os import error
-from PyQt5 import QtCore, QtGui, QtWidgets
-from ascii_functions import *
+# сторонний импорт в алфавитном порядке
 from PIL import Image
-from PyQt5.QtWidgets import QFileDialog, QMessageBox
-from PyQt5.QtGui import QPixmap
 from PIL.ImageQt import ImageQt
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import QFileDialog, QMessageBox
+
+# локальный импорт
+from ascii_functions import *
 
 
 class Ui_MainWindow(object):
@@ -12,9 +14,9 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1070, 850)
 
-        self.way = '' # путь до файла
+        self.way = ''  # путь до файла
 
-        self.width_ = 0 # по началу сделаем такими
+        self.width_ = 0  # по началу сделаем такими
         self.height_ = 0
 
         self.correct_width = True
@@ -40,8 +42,8 @@ class Ui_MainWindow(object):
         font.setPointSize(15)
         self.label_enter_ascii.setFont(font)
         self.label_enter_ascii.setObjectName("label_enter_ascii")
-        
-        self.scale = QtWidgets.QLineEdit(self.form) # моя попытка сделать набор аски символов пользователем
+
+        self.scale = QtWidgets.QLineEdit(self.form)
         self.scale.setGeometry(QtCore.QRect(330, 200, 250, 30))
         font = QtGui.QFont()
         font.setFamily("Calibri")
@@ -69,10 +71,10 @@ class Ui_MainWindow(object):
         self.contast_slider.setGeometry(QtCore.QRect(330, 270, 670, 25))
         self.contast_slider.setOrientation(QtCore.Qt.Horizontal)
         self.contast_slider.setObjectName("contast_slider")
-        self.contast_slider.setValue(10) # 10 значит, что контрастность изображения не менялась
-        self.contast_slider.setMinimum(0) # 0 значит, что изображение сплошное серое
-        self.contast_slider.setMaximum(100) # вообще, максимума у функции как такового нет, но у меня будет, для простоты
-        self.contast_slider.setTickPosition(1) # разметка
+        self.contast_slider.setValue(10)  # 10 - контрастность не менялась
+        self.contast_slider.setMinimum(0)  # 0 - изображение сплошное серое
+        self.contast_slider.setMaximum(100)
+        self.contast_slider.setTickPosition(1)  # разметка
 
         self.way_to_art_button = QtWidgets.QPushButton(self.form)
         self.way_to_art_button.setGeometry(QtCore.QRect(60, 70, 300, 80))
@@ -188,41 +190,45 @@ class Ui_MainWindow(object):
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        self.add_functions() # add_functions отвечает за привязку функций к кнопкам / ползункам / чекбоксам..
+        self.add_functions()  # привязка функций к кнопкам / ползункам..
 
     def retranslateUi(self, MainWindow):
-        _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "ASCII Art"))
-        #self.label_way.setText(_translate("MainWindow", self.way))
-        self.label_contrast_values.setText(_translate("MainWindow", "☟"))
-        self.label_contrast.setText(_translate("MainWindow", "Контрастность:"))
-        self.label_enter_ascii.setText(_translate("MainWindow", "ASCII-символы:"))
-        self.scale.setText(_translate("MainWindow", "@#S%?*+;:,."))
-        self.way_to_art_button.setText(_translate("MainWindow", "Путь к изображению")) # путь
-        self.readyButton.setText(_translate("MainWindow", "Готово!"))
-        self.label_change_size.setText(_translate("MainWindow", "Изменение размеров изображения:"))
-        self.label_width.setText(_translate("MainWindow", "Ширина (в пикселях):"))
-        self.label_height.setText(_translate("MainWindow", "Высота (в пикселях):"))
-        self.radBut_without.setText(_translate("MainWindow", "Без обработки"))
-        self.radBut_graify.setText(_translate("MainWindow", "Сделать изображение ч/б"))
-        self.radBut_ascii.setText(_translate("MainWindow", "Перевести в ASCII Art"))
-        self.label_set_tool.setText(_translate("MainWindow", "Пожалуйста, выберите одну из обработок изображения:"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.form), _translate("MainWindow", "Настройки"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.res), _translate("MainWindow", "Результат"))
+        _t = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_t("MainWindow", "ASCII Art"))
+        self.label_contrast_values.setText(_t("MainWindow", "☟"))
+        self.label_contrast.setText(_t("MainWindow", "Контрастность:"))
+        self.label_enter_ascii.setText(_t("MainWindow", "ASCII-символы:"))
+        self.scale.setText(_t("MainWindow", "@#S%?*+;:,."))
+        self.way_to_art_button.setText(_t("MainWindow", "Путь к изображению"))
+        self.readyButton.setText(_t("MainWindow", "Готово!"))
+        change_size_text = "Изменение размеров изображения:"
+        self.label_change_size.setText(_t("MainWindow", change_size_text))
+        self.label_width.setText(_t("MainWindow", "Ширина (в пикселях):"))
+        self.label_height.setText(_t("MainWindow", "Высота (в пикселях):"))
+        self.radBut_without.setText(_t("MainWindow", "Без обработки"))
+        self.radBut_graify.setText(_t("MainWindow", "Сделать изображение ч/б"))
+        self.radBut_ascii.setText(_t("MainWindow", "Перевести в ASCII Art"))
+        set_tool_text = "Пожалуйста, выберите одну из обработок изображения:"
+        self.label_set_tool.setText(_t("MainWindow", set_tool_text))
+        index = self.tabWidget.indexOf
+        set_tab_text = self.tabWidget.setTabText
+        set_tab_text(index(self.form), _t("MainWindow", "Настройки"))
+        set_tab_text(index(self.res), _t("MainWindow", "Результат"))
 
     def add_functions(self):
-        self.readyButton.clicked.connect(self.results) # все срабатывает при нажатии кнопки "Готово!"
+        self.readyButton.clicked.connect(self.results)
         self.way_to_art_button.clicked.connect(self.way_to_art_handler)
 
     def way_to_art_handler(self):
         filename = QFileDialog.getOpenFileName()
         self.way = filename[0]
-        splitted_way = self.way.split('/')
-        self.label_way.setText(QtCore.QCoreApplication.translate("MainWindow", splitted_way[len(splitted_way)-1]))
-        
+        split_way = self.way.split('/')
+        _t = QtCore.QCoreApplication.translate
+        self.label_way.setText(_t("MainWindow", split_way[len(split_way)-1]))
+
     def results(self):
         try:
-            image = Image.open(self.way) # работаю с открытием файла по имени
+            image = Image.open(self.way)  # работаю с открытием файла по имени
         except:
             self.createError("Путь до изображения некорректен")
         else:
@@ -251,36 +257,44 @@ class Ui_MainWindow(object):
                 self.not_zero_width = False
             else:
                 self.not_zero_width = True
-                
+
             if self.height_ == 0:
                 self.createError("Высота не может быть равна 0")
                 self.not_zero_height = False
             else:
                 self.not_zero_height = True
-            
-            if self.correct_width and self.correct_height and self.not_zero_height and self.not_zero_width:
-                resized_image = resize_image_user_tools(image, self.width_, self.height_)
-                contrasted_image = contrast(resized_image, self.contast_slider.value()/10)
+
+            correct_h_w = self.correct_width and self.correct_height
+            not_zero_h_w = self.not_zero_height and self.not_zero_width
+
+            if correct_h_w and not_zero_h_w:
+                w = self.width_
+                h = self.height_
+                resized_im = resize_image_user_tools(image, w, h)
+                contr_im = contrast(resized_im, self.contast_slider.value()/10)
                 if self.radBut_without.isChecked():
-                    self.set_non_text_image(modify_image_to_P_mode(contrasted_image))
+                    self.set_non_text_image(modify_image_to_P_mode(contr_im))
                 elif self.radBut_graify.isChecked():
-                    self.set_non_text_image(grayify(contrasted_image))
+                    self.set_non_text_image(grayify(contr_im))
                 elif self.radBut_ascii.isChecked():
                     ASCII_chars = list(self.scale.text())
                     if len(ASCII_chars) == 0:
                         self.createError("Введите, пожалуйста, ASCII-имволы")
                     else:
                         if len(ASCII_chars) == 1:
-                            warning_message = QMessageBox()
-                            warning_message.setWindowTitle("Предупреждение")
-                            warning_message.setText("Изображение из одного символа... ну ладно :)")
-                            warning_message.setIcon(QMessageBox.NoIcon)
-                            warning_message.setStandardButtons(QMessageBox.Ok)
-                            warning_message.exec()
-                        self.label_image.setText(do_ascii_art(contrasted_image, 1, ASCII_chars, self.width_, self.height_))
+                            warning_mes = QMessageBox()
+                            warning_mes.setWindowTitle("Предупреждение")
+                            one_symb = "Один символ?.. ну ладно :)"
+                            warning_mes.setText(one_symb)
+                            warning_mes.setIcon(QMessageBox.NoIcon)
+                            warning_mes.setStandardButtons(QMessageBox.Ok)
+                            warning_mes.exec()
+                        set_text = self.label_image.setText
+                        set_text(do_ascii_art(contr_im, 1, ASCII_chars, w, h))
                         self.formulate_ready_message()
                 else:
-                    self.createError("Пожалуйста, выберите одну из обработок, представленных ниже!")
+                    create_err = self.createError
+                    create_err("Пожалуйста, выберите одну из обработок ниже!")
 
     def set_non_text_image(self, processed_image):
         pixmap = QPixmap.fromImage(ImageQt(processed_image))
@@ -296,9 +310,11 @@ class Ui_MainWindow(object):
         error.exec_()
 
     def formulate_ready_message(self):
-        ready_message = QMessageBox()
-        ready_message.setWindowTitle("Готово")
-        ready_message.setText("Ваше изображение обработано! \nРезультат можно посмотреть на соседней вкладке :)")
-        ready_message.setIcon(QMessageBox.NoIcon)
-        ready_message.setStandardButtons(QMessageBox.Ok)
-        ready_message.exec()
+        ready_mes = QMessageBox()
+        ready_mes.setWindowTitle("Готово")
+        im_ready_text = "Изображение обработано!"
+        res_text = "Результат на соседней вкладке :)"
+        ready_mes.setText(im_ready_text + '\n' + res_text)
+        ready_mes.setIcon(QMessageBox.NoIcon)
+        ready_mes.setStandardButtons(QMessageBox.Ok)
+        ready_mes.exec()
