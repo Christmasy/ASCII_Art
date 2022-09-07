@@ -1,0 +1,4 @@
+1) https://www.youtube.com/watch?v=_7iDTpTop04 
+-- Python [PIL ImageEnhance] Enhance Color, Sharpness, Brightness & Contrast
+2) https://www.youtube.com/watch?v=uXlL2PeuLpQ
+-- пояснил за то, как выводить картинку с помощью проводника

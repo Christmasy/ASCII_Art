@@ -1,0 +1,38 @@
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QApplication, QMainWindow
+import sys
+
+class Window(QMainWindow): # этот класс и есть само по себе окно :)
+    def __init__(self):
+        super(Window, self).__init__() # вызываем конструктор из родительского для Window класса QMainWindow при помощи super
+        self.setWindowTitle("Простая программа")
+        self.setGeometry(300, 250, 350, 200)
+
+        self.new_text = QtWidgets.QLabel(self)
+
+        self.main_text = QtWidgets.QLabel(self) # здесь (как и далее для main_text, btn) self. обозначает, что переменная принадлежит классу Window
+        # далее можно будет обращаться к этой переменной внутри методов
+        self.main_text.setText("Это базовая надпись")
+        self.main_text.move(100, 100) # эти сдвиги на сто вниз и на сто вправо уже от window
+        self.main_text.adjustSize() #подстроили наш label под надпись
+
+        self.btn = QtWidgets.QPushButton(self)
+        self.btn.move(70, 150)
+        self.btn.setText("Нажми на меня")
+        self.btn.setFixedWidth(200)
+        self.btn.clicked.connect(self.add_label) # без круглых скобок add_label, т.к. хоти лишь поместить его, а не выполнить
+
+    def add_label(self):
+        self.new_text.setText("Вторая надпись")
+        self.new_text.move(100, 50)
+        self.new_text.adjustSize()
+
+def application():
+    app = QApplication(sys.argv)
+    window = Window()
+
+    window.show()
+    sys.exit(app.exec_())
+
+if __name__ == "__main__":
+    application()

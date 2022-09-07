@@ -1,0 +1,40 @@
+import tkinter as tk
+from tkinter import ttk
+root = tk.Tk()
+
+art = '''
+
+                uu$$$$$$$$$$$uu
+            uu$$$$$$$$$$$$$$$$$uu
+            u$$$$$$$$$$$$$$$$$$$$$u
+          u$$$$$$$$$$$$$$$$$$$$$$$u
+          u$$$$$$$$$$$$$$$$$$$$$$$$$u
+          u$$$$$$*   *$$$*   *$$$$$$u
+          *$$$$*      u$u       $$$$*
+          $$$u       u$u       u$$$
+          $$$u      u$$$u      u$$$
+            *$$$$uu$$$   $$$uu$$$$*
+            *$$$$$$$*   *$$$$$$$*
+              u$$$$$$$u$$$$$$$u
+                u$*$*$*$*$*$*$u
+    uuu        $$u$ $ $ $ $u$$       uuu
+    u$$$$       $$$$$u$u$u$$$       u$$$$
+    $$$$$uu      *$$$$$$$$$*     uu$$$$$$
+  u$$$$$$$$$$$uu    *****    uuuu$$$$$$$$$
+  $$$$***$$$$$$$$$$uuu   uu$$$$$$$$$***$$$*
+    ***      **$$$$$$$$$$$uu **$***
+            uuuu **$$$$$$$$$$uuu
+    u$$$uuu$$$$$$$$$uu **$$$$$$$$$$$uuu$$$
+    $$$$$$$$$$****           **$$$$$$$$$$$*
+      *$$$$$*                      **$$$$**
+        $$$*                         $$$$*
+
+'''
+
+print(art)
+style = ttk.Style()
+style.configure('Style.TButton', font='TkFixedFont')
+label = ttk.Label(text=art, style='Style.TButton')
+label.pack()
+
+root.mainloop()
